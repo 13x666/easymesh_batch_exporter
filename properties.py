@@ -235,6 +235,12 @@ class MeshExporterSettings(PropertyGroup):
         default=True
     )
 
+    mesh_export_custom_properties: BoolProperty(
+        name="Custom Properties",
+        description="Export custom properties (metadata) to FBX/glTF",
+        default=True
+    )
+
     # Triangulate properties
     mesh_export_tri: BoolProperty(
         name="Triangulate Faces",

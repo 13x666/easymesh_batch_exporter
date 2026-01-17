@@ -171,6 +171,12 @@ class MESH_PT_exporter_panel(Panel):
             elif settings.mesh_export_gltf_type == "GLB":
                 col.label(text="GLB format always embeds textures", icon='INFO')
 
+
+        # Add the Custom Properties checkbox
+        if settings.mesh_export_format in {"FBX", "GLTF"}:
+            col = layout.column(heading="Metadata", align=True)
+            col.prop(settings, "mesh_export_custom_properties", text="Export Custom Properties")
+
         layout.separator()
 
         # Export Button 

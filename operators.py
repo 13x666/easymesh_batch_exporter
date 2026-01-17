@@ -2253,6 +2253,7 @@ def export_object(obj, file_path, scene_props, export_scale=1.0, use_existing_se
                     mesh_smooth_type=scene_props.mesh_export_smoothing,
                     use_mesh_modifiers=False, # Handled by apply_mesh_modifiers
                     use_triangles=False,      # Handled by triangulate_mesh
+                    use_custom_props=scene_props.mesh_export_custom_properties,
                 )
             elif fmt == "OBJ":
                 bpy.ops.wm.obj_export(
@@ -2289,7 +2290,7 @@ def export_object(obj, file_path, scene_props, export_scale=1.0, use_existing_se
                     export_lights=False,
                     export_skins=False,  # Disable skin export to reduce size
                     export_animations=False,  # Disable animation export to reduce size
-                    export_extras=False,  # Disable extras to reduce size
+                    export_extras=scene_props.mesh_export_custom_properties,
                     export_yup=True, # Use Y-Up coordinate system
                     # Texture settings
                     export_texture_dir="",  # Export textures to same directory as GLTF

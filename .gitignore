@@ -185,3 +185,7 @@ NOTE.md
 
 # release notes
 releases/*
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/projectSettingsUpdater.xml
+.idea/indexLayout.xml
