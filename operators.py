@@ -1242,12 +1242,6 @@ def setup_export_object(obj, original_obj_name, scene_props, lod_level=None, ski
             logger.info(f"Object scale is not 1.0: {obj.scale}, applying...")
             apply_transforms(obj, apply_scale=True)
 
-        # Zero location if specified in scene properties
-        # Skip for batch exports to preserve spatial relationships
-        if scene_props.mesh_export_zero_location and not skip_zero_location:
-            obj.location = (0.0, 0.0, 0.0)
-            logger.info(f"Zeroed location for {obj.name}")
-
         # Calculate final scale factor but DON'T apply it to mesh data
         # This avoids memory-intensive vertex transformations
         final_scale_factor = scene_props.mesh_export_scale
@@ -3165,6 +3159,10 @@ class MESH_OT_batch_export(Operator):
                     
                     # Apply modifiers if needed
                     apply_mesh_modifiers(lod_obj, scene_props.mesh_export_apply_modifiers)
+
+                    if scene_props.mesh_export_zero_location:
+                        lod_obj.location = (0.0, 0.0, 0.0)
+                        logger.info(f"Zeroed location for {lod_obj.name}")
                     
                     # Triangulate if needed
                     if scene_props.mesh_export_tri:
@@ -3301,6 +3299,9 @@ class MESH_OT_batch_export(Operator):
                             lod_obj, original_obj.name, scene_props, lod_level
                         )
                         apply_mesh_modifiers(lod_obj, scene_props.mesh_export_apply_modifiers)
+                        if scene_props.mesh_export_zero_location:
+                            lod_obj.location = (0.0, 0.0, 0.0)
+                            logger.info(f"Zeroed location for {lod_obj.name}")
                         base_lod_obj = lod_obj
                     else:
                         # LOD1+: Reuse previous LOD with progressive decimation
@@ -3395,6 +3396,10 @@ class MESH_OT_batch_export(Operator):
                     obj, original_obj.name, scene_props
                 )
                 apply_mesh_modifiers(obj, scene_props.mesh_export_apply_modifiers)
+                
+                if scene_props.mesh_export_zero_location:
+                    obj.location = (0.0, 0.0, 0.0)
+                    logger.info(f"Zeroed location for {obj.name}")
                 
                 if scene_props.mesh_export_tri:
                     triangulate_mesh(

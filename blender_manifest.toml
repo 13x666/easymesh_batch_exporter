@@ -2,7 +2,7 @@ schema_version = "1.0.0"
 
 id = "easymesh_batch_exporter"
 version = "1.5.0"
-name = "EasyMesh Batch Exporter"
+name = "EasyMesh Batch Exporter (Modified)"
 tagline = "Streamlined mesh export for game development workflows"
 maintainer = "Bradley Walker"
 type = "add-on"
